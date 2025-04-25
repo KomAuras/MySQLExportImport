@@ -1,5 +1,5 @@
 @echo off
-rem создаем базы с именем как у файлов sql в текущей папке
+rem СЃРѕР·РґР°РµРј Р±Р°Р·С‹ СЃ РёРјРµРЅРµРј РєР°Рє Сѓ С„Р°Р№Р»РѕРІ sql РІ С‚РµРєСѓС‰РµР№ РїР°РїРєРµ
 for /f %%a in ('dir /b .\*.sql') do mysql.exe -uroot -e "CREATE DATABASE IF NOT EXISTS %%~na"
-rem грузим в базы файлы
+rem РіСЂСѓР·РёРј РІ Р±Р°Р·С‹ С„Р°Р№Р»С‹
 for /f %%a in ('dir /b .\*.sql') do mysql.exe -uroot %%~na  < %%~na.sql

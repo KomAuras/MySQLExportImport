@@ -1,12 +1,12 @@
 @echo off
-rem çàïèñûâàåì âñå èìåíà áàç â ôàéë
+rem Ð·Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°ÐµÐ¼ Ð²ÑÐµ Ð¸Ð¼ÐµÐ½Ð° Ð±Ð°Ð· Ð² Ñ„Ð°Ð¹Ð»
 mysql -uroot -e "SHOW DATABASES;" > tempos1.tmp
-rem èñïðàâëÿåì EOL CR íà CRLF
+rem Ð¸ÑÐ¿Ñ€Ð°Ð²Ð»ÑÐµÐ¼ EOL CR Ð½Ð° CRLF
 type tempos1.tmp | find /v "" > tempos2.tmp
 del /q tempos1.tmp
-rem óáèðàåì èç ôàéëà ñèñòåìíûå áàçû
+rem ÑƒÐ±Ð¸Ñ€Ð°ÐµÐ¼ Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð° ÑÐ¸ÑÑ‚ÐµÐ¼Ð½Ñ‹Ðµ Ð±Ð°Ð·Ñ‹
 findstr /V /R /I "^Database$ ^information_schema$ ^sys$ ^performance_schema$ ^mysql$" tempos2.tmp > tempos3.tmp
 del /q tempos2.tmp
-rem ýêñïîðòèðóåì âñå îñòàâøèåñÿ áàçû
+rem ÑÐºÑÐ¿Ð¾Ñ€Ñ‚Ð¸Ñ€ÑƒÐµÐ¼ Ð²ÑÐµ Ð¾ÑÑ‚Ð°Ð²ÑˆÐ¸ÐµÑÑ Ð±Ð°Ð·Ñ‹
 for /F "tokens=*" %%A in (tempos3.tmp) do mysqldump -v -uroot --databases %%A > %%A.sql
 del /q tempos3.tmp
